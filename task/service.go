@@ -1,7 +1,6 @@
 package task
 
 import (
-	"fmt"
 	"os"
 	"time"
 )
@@ -20,7 +19,6 @@ func NewDefaultService() *DefaultService {
 	switch os.Getenv("PROFILE") {
 	case "dev":
 	case "test":
-		fmt.Println("dev/test profile")
 		service.repo = &InMemRepository{}
 	default:
 		service.repo = &DefaultRepository{}
