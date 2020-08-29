@@ -5,10 +5,10 @@ import (
 	"time"
 )
 
-var inMemRepo *InMemRepository
+var inMemRepo *inMemRepository
 
 func setup() {
-	inMemRepo = &InMemRepository{}
+	inMemRepo = &inMemRepository{}
 }
 
 func TestInMemNewTask(t *testing.T) {
@@ -21,9 +21,9 @@ func TestInMemNewTask(t *testing.T) {
 	task.Name = name
 	task.StartTime = start
 
-	newTask, err := inMemRepo.AddTask(task)
+	newTask, err := inMemRepo.addTask(task)
 	if err != nil {
-		t.Errorf("Received the following error from inMemRepo.AddTask():\n%v", err)
+		t.Errorf("Received the following error from inMemRepo.addTask():\n%v", err)
 	}
 
 	if newTask.Model.ID == 0 {
@@ -42,21 +42,21 @@ func TestInMemNewTask(t *testing.T) {
 func TestInMemGetTasks(t *testing.T) {
 	setup()
 
-	tasks, err := inMemRepo.GetTasks()
+	tasks, err := inMemRepo.getTasks()
 	if err != nil {
 		t.Errorf("Received the following error from inMemRepo.getTasks():\n%v", err)
 	}
 
 	if len(tasks) != 0 {
-		t.Errorf("service.GetTasks() should have length of 0 before adding a task.")
+		t.Errorf("service.getTasks() should have length of 0 before adding a task.")
 	}
 
-	inMemRepo.AddTask(&Task{})
+	_, _ = inMemRepo.addTask(&Task{})
 
-	tasks, _ = inMemRepo.GetTasks()
+	tasks, _ = inMemRepo.getTasks()
 
 	if len(tasks) != 1 {
-		t.Errorf("service.GetTasks() should have length of 1 after adding a task, but got %v.", len(tasks))
+		t.Errorf("service.getTasks() should have length of 1 after adding a task, but got %v.", len(tasks))
 	}
 }
 
@@ -68,7 +68,7 @@ func TestInMemUpdateTask(t *testing.T) {
 
 	originalTask := &Task{Name: originalName, Note: originalNote}
 
-	originalTask, _ = inMemRepo.AddTask(originalTask)
+	originalTask, _ = inMemRepo.addTask(originalTask)
 
 	updatedName := "50-50 Grind"
 	updatedNote := "Crazy feeling!!!"
@@ -76,9 +76,9 @@ func TestInMemUpdateTask(t *testing.T) {
 	originalTask.Name = updatedName
 	originalTask.Note = updatedNote
 
-	updatedTask, err := inMemRepo.UpdateTask(originalTask)
+	updatedTask, err := inMemRepo.updateTask(originalTask)
 	if err != nil {
-		t.Errorf("Received the following error from inMemRepo.UpdateTask():\n%v", err)
+		t.Errorf("Received the following error from inMemRepo.updateTask():\n%v", err)
 	}
 
 	if updatedTask.Name != updatedName {
@@ -93,13 +93,13 @@ func TestInMemUpdateTask(t *testing.T) {
 func TestInMemRemoveTask(t *testing.T) {
 	setup()
 
-	newTask, _ := inMemRepo.AddTask(&Task{})
+	newTask, _ := inMemRepo.addTask(&Task{})
 
-	_ = inMemRepo.RemoveTask(newTask.Model.ID)
+	_ = inMemRepo.removeTask(newTask.Model.ID)
 
-	tasks, _ := inMemRepo.GetTasks()
+	tasks, _ := inMemRepo.getTasks()
 
 	if len(tasks) != 0 {
-		t.Errorf("inMemRepo.GetTasks() should have length of 0 after removing the only task, but got %v.", len(tasks))
+		t.Errorf("inMemRepo.getTasks() should have length of 0 after removing the only task, but got %v.", len(tasks))
 	}
 }

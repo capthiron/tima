@@ -1,27 +1,27 @@
 package task
 
-type Repository interface {
-	AddTask(task *Task) (*Task, error)
-	GetTasks() ([]Task, error)
-	UpdateTask(task *Task) (*Task, error)
-	RemoveTask(id uint) error
+type repository interface {
+	addTask(task *Task) (*Task, error)
+	getTasks() ([]Task, error)
+	updateTask(task *Task) (*Task, error)
+	removeTask(id uint) error
 }
 
-type DefaultRepository struct {
+type defaultRepository struct {
 }
 
-func (r DefaultRepository) AddTask(task *Task) (*Task, error) {
+func (r defaultRepository) addTask(task *Task) (*Task, error) {
 	return nil, nil
 }
 
-func (r DefaultRepository) GetTasks() ([]Task, error) {
+func (r defaultRepository) getTasks() ([]Task, error) {
 	return nil, nil
 }
 
-func (r DefaultRepository) UpdateTask(task *Task) (*Task, error) {
+func (r defaultRepository) updateTask(task *Task) (*Task, error) {
 	return nil, nil
 }
 
-func (r DefaultRepository) RemoveTask(id uint) error {
+func (r defaultRepository) removeTask(id uint) error {
 	return nil
 }
