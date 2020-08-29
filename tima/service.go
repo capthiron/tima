@@ -20,7 +20,7 @@ type DefaultService struct {
 
 func NewDefaultService() *DefaultService {
 	return &DefaultService{
-		taskService: task.NewDefaultService(),
+		taskService: task.NewService(),
 		dayService:  nil,
 	}
 }

@@ -11,10 +11,10 @@ type Task struct {
 	Note      string
 	StartTime time.Time
 	EndTime   time.Time
-	Status    status
+	Status    Status
 }
 
-type status string
+type Status string
 
-const TaskDone status = "DONE"
-const TaskInProgress status = "IN_PROGRESS"
+const TaskDone Status = "DONE"
+const TaskInProgress Status = "IN_PROGRESS"

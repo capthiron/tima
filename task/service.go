@@ -9,25 +9,24 @@ type Service interface {
 	getTasksForDay(day *time.Time) []Task
 }
 
-type DefaultService struct {
-	repo Repository
-}
-
-func NewDefaultService() *DefaultService {
-	service := &DefaultService{}
+func NewService() Service {
+	service := &defaultService{}
 
 	switch os.Getenv("PROFILE") {
 	case "dev":
 	case "test":
-		service.repo = &InMemRepository{}
+		service.repo = &inMemRepository{}
 	default:
-		service.repo = &DefaultRepository{}
+		service.repo = &defaultRepository{}
 	}
 
 	return service
 }
 
-func (s DefaultService) getTasksForDay(day *time.Time) []Task {
+type defaultService struct {
+	repo repository
+}
 
+func (s defaultService) getTasksForDay(day *time.Time) []Task {
 	return []Task{}
 }

@@ -4,21 +4,21 @@ import (
 	"math/rand"
 )
 
-type InMemRepository struct {
+type inMemRepository struct {
 	tasks []Task
 }
 
-func (r *InMemRepository) AddTask(task *Task) (*Task, error) {
+func (r *inMemRepository) addTask(task *Task) (*Task, error) {
 	task.Model.ID = uint(rand.Uint32())
 	r.tasks = append(r.tasks, *task)
 	return task, nil
 }
 
-func (r InMemRepository) GetTasks() ([]Task, error) {
+func (r inMemRepository) getTasks() ([]Task, error) {
 	return r.tasks, nil
 }
 
-func (r *InMemRepository) UpdateTask(taskToUpdate *Task) (*Task, error) {
+func (r *inMemRepository) updateTask(taskToUpdate *Task) (*Task, error) {
 	for i, task := range r.tasks {
 		if task.Model.ID == taskToUpdate.Model.ID {
 			r.tasks[i] = *taskToUpdate
@@ -27,7 +27,7 @@ func (r *InMemRepository) UpdateTask(taskToUpdate *Task) (*Task, error) {
 	return taskToUpdate, nil
 }
 
-func (r *InMemRepository) RemoveTask(id uint) error {
+func (r *inMemRepository) removeTask(id uint) error {
 	for i, task := range r.tasks {
 		if task.Model.ID == id {
 			r.tasks = append(r.tasks[:i], r.tasks[i+1:]...)

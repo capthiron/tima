@@ -4,9 +4,6 @@ import (
 	"testing"
 )
 
-func TestNewDefaultService(t *testing.T) {
-}
-
-func TestDefaultGetTasksForDay(t *testing.T) {
+func TestGetTasksForDay(t *testing.T) {
 
 }
