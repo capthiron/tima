@@ -105,4 +105,7 @@ modules.xml
 *.ipr
 .idea
 
+# Dev DB
+tima.db
+
 # End of https://www.toptal.com/developers/gitignore/api/intellij+iml,go
