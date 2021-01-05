@@ -10,7 +10,8 @@ import (
 var repo repository
 
 func beforeRepoTest() {
-	if err := os.Setenv("PROFILE", "test"); err != nil {
+	err := os.Setenv("PROFILE", "test")
+	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)
 	}
