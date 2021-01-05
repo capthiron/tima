@@ -30,7 +30,8 @@ func TestDefaultRepository_AddNote(t *testing.T) {
 		t.Error("Added note should not be nil")
 	}
 
-	if _, err := repo.getNote(addedNote.ID); err != nil {
+	_, err = repo.getNote(addedNote.ID)
+	if err != nil {
 		t.Error("Failed to get added note with error:", err)
 	}
 }
