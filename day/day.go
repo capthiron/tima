@@ -1,7 +1,7 @@
 package day
 
 import (
-	"github.com/capthiron/tima/task"
+	"github.com/capthiron/tima/note"
 	"gorm.io/gorm"
 	"time"
 )
@@ -11,5 +11,11 @@ type Day struct {
 	StartTime     time.Time `gorm:"not null"`
 	EndTime       time.Time
 	BreakDuration int
-	Tasks         []task.Task `gorm:"-"`
+	WorkHours     WorkHours   `gorm:"-"`
+	Notes         []note.Note `gorm:"-"`
+}
+
+type WorkHours struct {
+	hours   int
+	minutes int
 }
