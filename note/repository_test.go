@@ -80,9 +80,9 @@ func TestDefaultRepository_GetNotesForDay(t *testing.T) {
 		t.Errorf("Expected exactly 2 notes but got %v", len(notesForToday))
 	}
 
-	for _, task := range notesForToday {
-		if task.Start != today {
-			t.Errorf("Expected note.StartTime to be %v but got %v", today, task.Start)
+	for _, note := range notesForToday {
+		if note.Start != today {
+			t.Errorf("Expected note.StartTime to be %v but got %v", today, note.Start)
 		}
 	}
 }
