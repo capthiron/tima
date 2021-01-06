@@ -5,6 +5,35 @@ import (
 	"time"
 )
 
+// mock repository
+type mockRepo struct{}
+
+var addNoteMock func(note *Note) (*Note, error)
+var getNoteMock func(id uint) (*Note, error)
+var getNotesForDayMock func(day time.Time) ([]Note, error)
+var updateNoteMock func(note *Note) (*Note, error)
+var deleteNoteMock func(id uint) error
+
+func (m mockRepo) addNote(note *Note) (*Note, error) {
+	return addNoteMock(note)
+}
+
+func (m mockRepo) getNote(id uint) (*Note, error) {
+	return getNoteMock(id)
+}
+
+func (m mockRepo) getNotesForDay(day time.Time) ([]Note, error) {
+	return getNotesForDayMock(day)
+}
+
+func (m mockRepo) updateNote(note *Note) (*Note, error) {
+	return updateNoteMock(note)
+}
+
+func (m mockRepo) deleteNote(id uint) error {
+	return deleteNoteMock(id)
+}
+
 var service Service
 var mockedRepo mockRepo
 
@@ -114,33 +143,4 @@ func TestDefaultService_DeleteNote(t *testing.T) {
 	if deleteNoteCalled != 1 {
 		t.Errorf("deleteNote() should have been called once but got %v", deleteNoteCalled)
 	}
-}
-
-// mock repository
-type mockRepo struct{}
-
-var addNoteMock func(note *Note) (*Note, error)
-var getNoteMock func(id uint) (*Note, error)
-var getNotesForDayMock func(day time.Time) ([]Note, error)
-var updateNoteMock func(note *Note) (*Note, error)
-var deleteNoteMock func(id uint) error
-
-func (m mockRepo) addNote(note *Note) (*Note, error) {
-	return addNoteMock(note)
-}
-
-func (m mockRepo) getNote(id uint) (*Note, error) {
-	return getNoteMock(id)
-}
-
-func (m mockRepo) getNotesForDay(day time.Time) ([]Note, error) {
-	return getNotesForDayMock(day)
-}
-
-func (m mockRepo) updateNote(note *Note) (*Note, error) {
-	return updateNoteMock(note)
-}
-
-func (m mockRepo) deleteNote(id uint) error {
-	return deleteNoteMock(id)
 }
